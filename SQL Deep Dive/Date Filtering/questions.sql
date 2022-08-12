@@ -4,7 +4,11 @@
 * Question: Get me all the employees above 60, use the appropriate date functions
 */
 
-SELECT * FROM employees;
+SELECT age(birth_date) from "public"."employees"
+where (
+    EXTRACT ('year' from age(birth_date) )
+) > 60;
+
 
 /*
 * DB: Employees
@@ -12,7 +16,8 @@ SELECT * FROM employees;
 * Question: How many employees where hired in February?
 */
 
-SELECT * FROM employees;
+SELECT count(emp_no) from "public"."employees"
+where extract ('month' from "hire_date") = 02;
 
 /*
 * DB: Employees
@@ -20,7 +25,8 @@ SELECT * FROM employees;
 * Question: How many employees were born in november?
 */
 
-SELECT * FROM employees;
+SELECT count(emp_no) from "public"."employees"
+where extract ('month' from "hire_date") = 11;
 
 /*
 * DB: Employees
@@ -36,5 +42,6 @@ SELECT * FROM employees;
 * Question: How many orders were made in January 2004?
 */
 
-SELECT * FROM orders;
+SELECT count(orderid) from "public"."orders"
+where EXTRACT ( month from orderdate ) = 01;
 
